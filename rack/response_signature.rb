@@ -19,7 +19,7 @@ module Rack
   # per request.  However, the use of SSL accrues significate overhead both for
   # the server, the client, and the network in general.  Not only that, but
   # in some cases (like Heroku) using a custom, verifiable SSL certificate
-  # is either not a reasonable or not possible.
+  # is either not reasonable or not possible.
   # 
   # === Using Rack::ResponseSignature
   # 
