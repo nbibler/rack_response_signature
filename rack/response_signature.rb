@@ -16,7 +16,7 @@ module Rack
   # 
   # Obviously, it would be more straightforward to simply use an SSL 
   # certificate provided by a trusted CA and just enable SSL verification
-  # per request.  However, the use of SSL acrues significate overhead both for
+  # per request.  However, the use of SSL accrues significate overhead both for
   # the server, the client, and the network in general.  Not only that, but
   # in some cases (like Heroku) using a custom, verifiable SSL certificate
   # is either not a reasonable or not possible.
