@@ -10,6 +10,10 @@ module Rack
   # clients may then validate the response against a known-good public key
   # to verify server authenticity against a man-in-the-middle attack.
   # 
+  # The signature, if generated, is placed in a "Response-Signature" HTTP 
+  # header.  Currently, signatures are only generated for HTTP SUCCESS (200) 
+  # responses.
+  # 
   # Obviously, it would be more straightforward to simply use an SSL 
   # certificate provided by a trusted CA and just enable SSL verification
   # per request.  However, the use of SSL acrues significate overhead both for
