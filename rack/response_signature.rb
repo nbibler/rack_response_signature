@@ -40,6 +40,25 @@ module Rack
   # 
   # This is especially useful for Heroku deployments.
   # 
+  # === Manual Verification of Signature
+  # 
+  # Using curl, you can manually inspect to be sure that your signatures are 
+  # being generated with:
+  # 
+  #     $ curl -is http://myserver.com
+  # 
+  # Which would return something similar to:
+  # 
+  #     HTTP/1.1 200 OK
+  #     Server: nginx/0.6.39
+  #     Date: Tue, 23 Feb 2010 05:15:25 GMT
+  #     Content-Type: application/xml; charset=utf-8
+  #     Transfer-Encoding: chunked
+  #     Connection: keep-alive
+  #     ETag: "54a2096d2c361907b3f9cc7ec9a2231d"
+  #     Response-Signature: JywymlJfA90Q4x52LKt4J8Tb8p4rXI%2BptKDNm3NC7F495...
+  #     Cache-Control: private, max-age=0, must-revalidate
+  # 
   # === Client Verification
   # 
   # To verify your signatures on the client, simply share your public RSA key
