@@ -1,0 +1,81 @@
+== Rack::ResponseSignature
+
+Rack::ResponseSignature is a Rack middleware which can drop into any 
+Rack-compliant application an add transparent response signing.  Response 
+signing is done to verify to clients that the response is coming from a 
+trusted source.  The signature is currently based on RSA Public/Private key 
+pair signing.
+
+Primarily, this is useful when verified-SSL is not an option.  This may occur 
+when you are working on a shared host or other environment which utilizes 
+wildcard certificates (like Heroku).  In this case, while the SSL certificate
+may be verified with the Certificate Authority, it doesn't not ensure the 
+identity of the serving party.
+
+With this implementation:
+
+* RSA keys of any strength may be used,
+* SSL certificates are optional,
+* Response signing is transparent,
+* Response verification is simple
+
+=== Installation
+
+From the gem:
+
+    $ sudo gem install rack-response-signature
+
+From source:
+
+    $ git clone http://github.com/nbibler/rack_response_signature.git
+    $ rake package && sudo rake install
+
+=== Basic Usage
+
+==== Rack
+
+Rack::ResponseSignature is implemented as a piece of Rack middleware and can 
+be used with any Rack-based application.  If your application includes a 
+rackup file (`config.ru`, for example) or uses Rack::Builder to construct the 
+application stack, then require and use, like so:
+
+    require 'rack/response_signature'
+    
+    use Rack::ResponseSignature, "my-private-ssh-key-for-signing"
+    
+    run app
+
+The SSH key may also be read from a file with `File.read('private.key')`, as 
+well.
+
+==== Rails
+
+To use this middleware with Rails, add this to your `config/environment.rb`,
+to `config/environments/production.rb`, or to an initializer:
+
+    config.middleware.use Rack::ResponseSignature, "my-private-ssh-key..."
+
+You should now see `Rack::ResponseSignature` listed in the middleware stack:
+
+    $ rake middleware
+
+=== License
+
+Copyright (c) 2010 Nathaniel Bibler <http://www.nathanielbibler.com/>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
