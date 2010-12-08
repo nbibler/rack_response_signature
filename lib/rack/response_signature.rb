@@ -10,7 +10,7 @@ module Rack
   # clients may then validate the response against a known-good public key
   # to verify server authenticity against a man-in-the-middle attack.
   # 
-  # The signature, if generated, is placed in a "Response-Signature" HTTP 
+  # The signature, if generated, is placed in a "X-Response-Signature" HTTP
   # header.  Currently, signatures are only generated for HTTP SUCCESS (200) 
   # responses.
   # 
@@ -56,7 +56,7 @@ module Rack
   #     Transfer-Encoding: chunked
   #     Connection: keep-alive
   #     ETag: "54a2096d2c361907b3f9cc7ec9a2231d"
-  #     Response-Signature: JywymlJfA90Q4x52LKt4J8Tb8p4rXI%2BptKDNm3NC7F495...
+  #     X-Response-Signature: JywymlJfA90Q4x52LKt4J8Tb8p4rXI%2BptKDNm3NC7F495...
   #     Cache-Control: private, max-age=0, must-revalidate
   # 
   # === Client Verification
@@ -76,7 +76,7 @@ module Rack
   #     
   #     puts "Response valid? %s" % [OpenSSL::PKey::RSA.new(PublicKey).
   #       verify(OpenSSL::Digest::SHA256.new, 
-  #             Base64.decode64(CGI.unescape(response['Response-Signature'])), 
+  #             Base64.decode64(CGI.unescape(response['X-Response-Signature'])), 
   #             response.body.strip)]
   # 
   # === Options
