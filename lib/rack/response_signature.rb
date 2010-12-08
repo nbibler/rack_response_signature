@@ -117,7 +117,7 @@ module Rack
     end
     
     def add_signature(headers, body)
-      headers['Response-Signature'] = CGI.escape(Base64.encode64(sign(body)))
+      headers['X-Response-Signature'] = CGI.escape(Base64.encode64(sign(body)))
       headers
     end
     
