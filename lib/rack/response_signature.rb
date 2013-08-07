@@ -101,7 +101,7 @@ module Rack
       status, headers, response = @app.call(env)
 
       if set_signature_header?(status)
-        [status, add_signature(headers, value_of(response)), value_of(response)]
+        [status, add_signature(headers, value_of(response)), response]
       else
         [status, headers, response]
       end
@@ -133,7 +133,9 @@ module Rack
     end
 
     def value_of(response)
-      (response.respond_to?(:body) ? response.body : response).strip
+      body = (response.respond_to?(:body) ? response.body : response)
+      body = body.inject("") { |content, sum| sum += content }
+      body.strip
     end
   end
 end
