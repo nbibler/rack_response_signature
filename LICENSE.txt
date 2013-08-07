@@ -1,4 +1,4 @@
-Copyright (c) 2010 Nathaniel BiblerA.
+Copyright (c) 2010 Nathaniel Bibler.
 
 MIT License
 
