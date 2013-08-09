@@ -87,7 +87,7 @@ module Rack
   #   Set the digest to use when generating the signature (Default: OpenSSL::Digest::SHA256)
   #
   class ResponseSignature
-    VERSION = '0.3.0'
+    VERSION = '0.3.1'
 
     def initialize(app, private_key, options = {})
       options[:digest]  ||= OpenSSL::Digest::SHA256
