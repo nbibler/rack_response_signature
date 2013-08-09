@@ -134,7 +134,7 @@ module Rack
 
     def value_of(response)
       body = (response.respond_to?(:body) ? response.body : response)
-      body = body.inject("") { |content, sum| sum += content }
+      body = body.inject("") { |content, sum| sum += content } if body.respond_to?(:inject)
       body.strip
     end
   end
